@@ -1,0 +1,232 @@
+\documentclass[twoside,11pt]{book}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Opcões de Linguagem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{bookml/bookml}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ams-latex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Ambientes 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}  %   bold title, italic body
+\newtheorem{teo}{Teorema}[section]
+\newtheorem{lem}{Lema}[section]
+\newtheorem{prop}{Proposição}[section]
+\newtheorem{corol}{Corolário}[section]
+\newtheorem{defn}{Definição}[section]
+\theoremstyle{remark}  % italic title, romman body
+\theoremstyle{definition}  % italic title, romman body
+\newtheorem{obs}{Observação}[section]
+\newtheorem{ex}{Exemplo}[section]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graphics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphics}
+\usepackage{graphicx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuração dos exercícios
+% Caso livro: pacote exercise
+% Caso xml: define newtheorems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iflatexml 
+\input{config_exer_xml.tex}
+\else 
+\usepackage[a4paper,headheight=15.4pt]{geometry}
+\input{config_exer_pdf.tex}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fancy Header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE]{Matemática Financeira}
+\fancyhead[LO]{\rightmark}
+\fancyhead[LE,RO]{\thepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Miscellaneous
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+\renewcommand{\arraystretch}{1.5}  % space between rows in tables
+\usepackage{array,booktabs}
+\usepackage{xcolor}
+%\usepackage{tikz}
+\usepackage{microtype}
+\usepackage{makeidx}
+\usepackage{subfiles} % independent chapters
+
+% license footnote
+\cfoot{\tiny{Licença \href{https://creativecommons.org/licenses/by-sa/3.0/}{CC-BY-SA-3.0}. Contato: \url{reamat@ufrgs.br}}}
+
+% no blank pages between chapters
+\let\cleardoublepage\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS E NOVOS COMANDOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \DeclareTextFontCommand{\emph}{\bfseries}
+\DeclareMathOperator*{\sen}{sen}
+\DeclareMathOperator*{\senh}{senh}
+\renewcommand{\sin}{\operatorname{\sen}}
+\renewcommand{\sinh}{\operatorname{\senh}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define o ambiente abstract, que não é padrão no book
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\summaryname{abstract}
+\newenvironment{abstract}%
+    {\small\begin{center}%
+    \bfseries{\summaryname} \end{center}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REQUIRED for correct formatting and tagging of BookML output: title and author
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Matemática Financeira\\\small{Um Livro Colaborativo}}
+\date{\today}
+\author{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RECOMMENDED for PDF quality: enable clickable links and metadata in PDFs
+% the option pdfusetitle adds \author and \title to the PDF metadata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdfusetitle]{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RECOMMENDED for PDF quality: higher quality equivalent of Computer Modern
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lmodern}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REQUIRED for TikZ: use bmlImageEnvironment for TikZ and other images, since
+%                    LaTeXML is slow and often produces garbled TikZ output
+%                    (this requires \usepackage{bookml/bookml})
+% tell BookML to compile tikzpicture and tikzcd environments into images via LaTeX
+
+\bmlImageEnvironment{tikzpicture,tikzcd}
+% hide all TikZ-related commands from LaTeXML, but leave them when generating the PDF
+\iflatexml            % are we compiling through LaTeXML?
+\else
+\usepackage{tikz}     % if not, load TikZ as usual
+\usetikzlibrary{cd}
+\usepackage[all]{xy}
+% other TikZ-related command MUST be here, before \fi
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% OPTIONAL for accessibility: additional versions of the document (e.g. large print)
+% the additional formats will be recompiled automatically whenever there are changes
+% you may use "\jobname" instead of "template" to pick up the name from this very file
+% % \bmlAltFormat{template.pdf}{PDF (serif)} % always included; here \bmlAltFormat simply changes its label
+% % \bmlAltFormat{template-sans.pdf}{PDF (sans serif)}
+% % \bmlAltFormat{template-sans-large.pdf}{PDF (sans, large)}
+
+% very cheap way of generating a 'large print' PDF (~19% bigger)
+\ifcsname bmlCrop\endcsname % is \bmlCrop defined?
+\usepackage{crop}           % if so, load the package crop
+\fi
+%%% What is \bmlCrop?
+% template-sans-large.tex uses \input{template.tex} to read this file.
+% Before that, it defines \bmlCrop, so that the above code imports crop.
+% It also uses \PassOptionsToPackage to tweak the options of crop.
+% The result has identical pagination as the normal PDF so you do not need
+% to review both versions.
+%
+% However, the magnification is very limited. If you need larger magnification,
+% you may have to use a larger font, in which case the large print PDF will
+% will look different and must be reviewed regularly.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+\iflatexml
+\begin{abstract}
+  % RECOMMENDED for SCORM: the abstract becomes the description of the SCORM package
+  % Copiei do prefácio
+  Este livro busca abordar os tópicos de um curso moderno de Matemática Financeira.
+\end{abstract}
+\fi
+
+
+\maketitle
+
+\mainmatter
+\include{organizadores}
+\include{licenca}
+\include{nota_organizadores}
+\include{prefacio}
+
+
+% %%% OPTIONAL: footer for HTML output, for instance a copyright notice
+% % note that the footer does not appear in the PDF
+% % the PDF footer can be done in any of the usual ways (e.g. fancyhdr)
+\iflatexml
+
+\begin{lxFooter}
+  Licença CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/
+\end{lxFooter}
+\fi
+% Capítulos
+
+\mainmatter
+ 
+\include{./cap_introducao/cap_introducao}
+
+\clearpage
+\appendix
+%\include{./apendice/apendice}
+
+% Respostas dos exercícios no final do livro
+\iflatexml
+\else
+\input{respostas} 
+\fi
+
+
+% Referências bibliográficas
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{main}
+\addcontentsline{toc}{chapter}{Referências Bibliográficas}
+% \fancyhead[RE]{Transformada de Laplace}
+% \fancyhead[LO]{REFERÊNCIAS BIBLIOGRÁFICAS}
+% \fancyhead[LE,RO]{\thepage}
+
+
+
+\backmatter
+\input{colaboradores}
+\printindex
+
+\end{document}
