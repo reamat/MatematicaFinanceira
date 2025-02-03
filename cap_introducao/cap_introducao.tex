@@ -1,35 +1,19 @@
 %Este trabalho está licenciado sob a Licença Creative Commons Atribuição-CompartilhaIgual 3.0 Não Adaptada. Para ver uma cópia desta licença, visite http://creativecommons.org/licenses/by-sa/3.0/ ou envie uma carta para Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 %!TEX root = ../livro.tex
 
-\setlength{\headheight}{30pt} % Veja https://nw360.blogspot.com/2006/11/latex-headheight-is-too-small.html
-\chapter{Taxa de juros}\label{cap_introducao}
+\newpage
+\setcounter{section}{1}
+\section{Juros Simples}
+%\autores
 
-A taxa de juros.
+No tópico anterior, estudamos exemplos de operações financeiras em que a capitalização dos juros acontecia uma única vez ao final da operação. Mas na maioria das operações de investimentos ou empréstimos, a capitalização acontece em períodos diferentes da duração da operação. Por exemplo, um capital investido na Caderneta de Poupança pode não receber juros (se retirado antes de um mês) ou receber juros mensais. Também, um empréstimo tomado por um prazo pode ser quitado parcial ou integralmente antes da data original, reduzindo assim o valor dos juros da operação, e fazendo-se necessário que se saiba como a dívida evolui diariamente/mensalmente. Em ambas as situações, precisamos saber como fracionar o cálculo do juros para outro período (meses no caso da poupança e dias para o empréstimo) e analisar como se dá a evolução do capital investido com a agregação de juros por período. 
 
-\begin{defn}
-    Um número é dito positivo se for maior que zero.
-\end{defn}
+A seguir, veremos o caso mais simples de capitalização periódica de juros.
 
-\section{Juros computados continuamente}\label{sec_juros_continuos}
 
-\begin{equation}
-    \lim_{n\to +\infty} \left(1+\frac{1}{n}\right)^n
-\end{equation}
+\subsection{Capitalização a juros simples}
 
-\subsection*{Exercícios}
-~
-\begin{exer} Calcule $2 + 3\times 4 + 1$.
-\end{exer}
-\begin{resp}
-15
-\end{resp}
+No regime de capitalização simples, os juros são calculados somente sobre o valor aplicado, ou seja, a taxa de juros incide somente sobre o principal. Assim, o valor dos juros por cada período é constante, pois só depende do principal e da taxa. Portanto, se a taxa de juros em cada período é $i$, temos que os juros em cada período será dado por $i\cdot P$.
 
-\begin{exer} Calcule:
-    \begin{equation}
-        1 + 2 + 3 + 4 + 5 + \cdots + 100
-    \end{equation}
-\end{exer}
-\begin{resp}
-    5050
-\end{resp}
-    
+Considere um empréstimo de R\$ 1.000,00 por 3 meses sujeito à taxa de juros simples de 20\% a.m. Ao final do primeiro mês, os juros devidos serão 20\% do capital emprestado, ou seja, $J_1 = 0,2 \cdot 1000 = 200$, e a dívida neste instante é de $S_1= P+J_1 = 1200$. Transcorrido mais um mês, os novos juros devidos serão 20\% do capital emprestado, ou seja, $J_2 = 200$, e a dívida neste momento é de $S_2=P+J_1+J_2=1400$. Ao final do terceiro mês, os juros novamente serão sobre o capital originalmente emprestado, e assim $J_3 = 200$. Assim, os juros gerados pelo empréstimo foram de $J=J_1+J_2+J_3=3\cdot 200=600$, e portanto, a dívida a ser paga é de R\$ 1.600. 
+
